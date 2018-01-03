@@ -17,4 +17,9 @@ class User extends BaseModel
         return $user;
     }
 
+    public function address()
+    {
+        return $this->hasOne('UserAddress','user_id','id');
+    }
+
 }

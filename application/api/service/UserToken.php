@@ -46,11 +46,10 @@ class UserToken extends Token
             else
             {
                 //正常获取到openid,生成Token
-                $this->grantToken($wxResult);
+                return $this->grantToken($wxResult);
 
             }
         }
-        return $wxResult;
 
     }
 

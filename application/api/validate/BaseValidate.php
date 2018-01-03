@@ -59,4 +59,31 @@ class BaseValidate extends Validate
         }
         return true;
     }
+    protected  function isMobile($value)
+    {
+        $rule = '^1(3|4|5|6|7|8)[0-9]\d{8}$^';
+        $result = preg_match($rule,$value);
+        if(!$result)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function getDataByRule($arrays)
+    {
+        //接收所有参数变量
+        if(array_key_exists('user_id',$arrays)|
+            array_key_exists('uid',$arrays))
+        {
+            //不允许包含user_id or uid ，防止恶意覆盖主键；
+            throw new ParameterException(['msg' =>'参数包含非法参数']);
+        }
+        $newArray =[];
+        foreach($this->rule as $key => $value)
+        {
+            $newArray[$key] = $arrays[$key];
+        }
+        return $newArray;
+    }
 }
